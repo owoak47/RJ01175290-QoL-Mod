@@ -1,0 +1,6 @@
+*.rmmzsave
+*.exe
+updater-settings.json
+.rj-qol-backups/
+.rj-qol-mod.json
+__pycache__/

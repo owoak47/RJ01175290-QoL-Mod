@@ -1,0 +1,24 @@
+name: Publish friend Mod
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate and package
+        run: python3 publish.py
+      - name: Publish new version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(python3 -c "import json;print(json.load(open('bundle/manifest.json'))['version'])")
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "Version already published; keeping existing asset."
+          else
+            gh release create "v$version" RJ01175290-QoL-Mod.zip --target "$GITHUB_SHA" --title "朋友版 Mod $version" --notes-file release-notes.md --latest
+          fi

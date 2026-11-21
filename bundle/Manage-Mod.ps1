@@ -169,7 +169,7 @@ try {
     $index = $plugins.Count
     for ($i=0;$i -lt $plugins.Count;$i++) { if ($plugins[$i].name -eq 'Shiroin_OffscreenSpriteCull') { $index=$i;break } }
     foreach ($module in $manifest.modules) {
-        $plugins.Insert($index,@{name=$module.name;status=$true;description='RJ QoL Mod 1.0.9';parameters=@{}})
+        $plugins.Insert($index,@{name=$module.name;status=$true;description='RJ QoL Mod 1.0.10';parameters=@{}})
         $index++
     }
     $lines = @($plugins | ForEach-Object { $Json.Serialize($_) })

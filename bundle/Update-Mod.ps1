@@ -30,7 +30,7 @@ try {
     if(-not $www){throw '找不到遊戲資料夾。'}
     $running=@(Get-CimInstance Win32_Process|Where-Object {$_.ExecutablePath -and $_.ExecutablePath.StartsWith(([IO.Directory]::GetParent($www).FullName+'\'),[StringComparison]::OrdinalIgnoreCase) -and $_.Name -in @('nw.exe','Game.exe')})
     if($running.Count){throw '請先儲存並正常關閉遊戲，再更新 Mod。'}
-    if([IO.File]::ReadAllText((Join-Path $www 'js\rmmz_objects.js')) -match '_local(?:TeaTicket|Temperance|AsabaStrawberry)Locked'){throw '這是自用固定數量版本，請改選朋友的一般版。'}
+    if([IO.File]::ReadAllText((Join-Path $www 'js\rmmz_objects.js')) -match '_local(?:TeaTicket|Temperance|AsabaStrawberry)Locked'){throw '偵測到不相容的遊戲程式修改，已取消更新。'}
     $work=Join-Path ([IO.Path]::GetTempPath()) ('RJ-QoL-Update-'+[guid]::NewGuid().ToString('N'))
     [void][IO.Directory]::CreateDirectory($work)
     $archive=Join-Path $work 'update.zip'

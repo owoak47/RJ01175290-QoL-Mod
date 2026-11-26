@@ -118,7 +118,7 @@ try {
     }
     $engine = Read-Text (Join-Path $www 'js\rmmz_objects.js')
     if ($engine -match '_local(?:TeaTicket|Temperance|AsabaStrawberry)Locked') {
-        throw '偵測到自用固定數量版本。為保留你的設定，拒絕安裝；請改用一般版遊戲副本。'
+        throw '偵測到不相容的遊戲程式修改。為保護現有設定，已取消安裝。'
     }
     $writes = New-Object Collections.Generic.List[object]
     foreach ($patch in $manifest.patches) {
@@ -169,7 +169,7 @@ try {
     $index = $plugins.Count
     for ($i=0;$i -lt $plugins.Count;$i++) { if ($plugins[$i].name -eq 'Shiroin_OffscreenSpriteCull') { $index=$i;break } }
     foreach ($module in $manifest.modules) {
-        $plugins.Insert($index,@{name=$module.name;status=$true;description='RJ QoL Mod 1.0.10';parameters=@{}})
+        $plugins.Insert($index,@{name=$module.name;status=$true;description='RJ QoL Mod 1.0.11';parameters=@{}})
         $index++
     }
     $lines = @($plugins | ForEach-Object { $Json.Serialize($_) })
@@ -206,7 +206,7 @@ try {
     }
     Write-Output ('安裝完成：'+$www)
     Write-Output ('備份：'+$backup)
-    Write-Output '請正常啟動Game.exe。套件沒有修改任何存檔，也沒有固定物品數量功能。'
+    Write-Output '請正常啟動 Game.exe。'
     exit 0
 } catch {
     Write-Output ('失敗：'+$_.Exception.Message)

@@ -16,5 +16,5 @@ for x in m['modules']:assert sha(b/'plugins'/(x['name']+'.js'))==x['sha256']
 with zipfile.ZipFile('RJ01175290-QoL-Mod.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p in sorted(b.rglob('*')):
   if p.is_file():z.write(p,'RJ01175290-QoL-Mod-'+m['version']+'/'+p.relative_to(b).as_posix())
-pathlib.Path('release-notes.md').write_text('朋友版便利功能 Mod '+m['version']+'。解壓縮後執行 Update.cmd；之後使用桌面的更新捷徑。支援 '+ '、'.join(m['gameVersions'])+'。不含完整遊戲、存檔或固定物品數量功能。',encoding='utf-8')
+pathlib.Path('release-notes.md').write_text('朋友版便利功能 Mod '+m['version']+'。解壓縮後執行 Update.cmd；之後使用桌面的更新捷徑。支援 '+ '、'.join(m['gameVersions'])+'。請先備份遊戲進度，並在安裝前關閉遊戲。',encoding='utf-8')
 print('Validated package:',m['version'])
